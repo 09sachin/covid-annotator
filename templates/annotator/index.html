@@ -1,0 +1,481 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Annotator</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{% static 'annotator/style.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+</head>
+
+<body>
+
+    <header>
+
+        <nav>
+
+            <div class="menu-icon">
+                <i class="fa fa-bars fa-2x"></i>
+            </div>
+
+            <div class="logo">COVIDANALYSIS</div>
+
+            <div class="menu">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+
+    </header>
+
+
+    <form id="regForm" action="" enctype= multipart/form-data method="post">
+        {% csrf_token %}
+
+
+
+        <div class="tab" >
+          <h1>Register:</h1>
+           <p>Description</br>
+               Coronaviruses (CoV) are a large family of viruses that cause illness ranging from the common cold to more severe diseases such as Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV). A novel coronavirus (nCoV) is a new strain that has not been previously identified in humans.
+
+               Coronaviruses are zoonotic, meaning they are transmitted between animals and people. Detailed investigations found that SARS-CoV was transmitted from civet cats to humans and MERS-CoV from dromedary camels to humans. Several known coronaviruses are circulating in animals that have not yet infected humans.
+
+                   Common signs of infection include respiratory symptoms, fever, cough, shortness of breath and breathing difficulties. In more severe cases, infection can cause pneumonia, severe acute respiratory syndrome, kidney failure and even death.
+
+               Standard recommendations to prevent infection spread include regular hand washing, covering mouth and nose when coughing and sneezing, thoroughly cooking meat and eggs. Avoid close contact with anyone showing symptoms of respiratory illness such as coughing and sneezing.
+
+           </p>
+            <p>Name: <span>{{form.name}}</span> </p>
+            <p>Document: <span>{{form.document}}</span> </p>
+
+        </div>
+
+
+
+    <!-- One "tab" for each step in the form: -->
+
+         <div class="tab">
+
+            <h2 style="text-center">Page1</h2>
+
+            <strong>1. What do you think?</strong>
+            <ul>
+                <input type="radio" name="p1q1" value="choice1"><label for="choice1">Male</label>
+                <input type="radio"  name="p1q1" value="choice2"><label for="choice 2">Female</label>
+                <input type="radio" name="p1q1" value="choice3"><label for="choice 3">Other</label>
+
+            </ul>
+
+            <strong>2. What do you want</strong>
+            <input type="checkbox" name="p1q2" value="item_key1">
+            <label for="item_key1"> I have a bike</label><br>
+            <input type="checkbox" name="p1q2" value="item_key2">
+            <label for="item_key2"> I have a car</label><br>
+            <input type="checkbox" name="p1q2" value="item_key3">
+            <label for="item_key3"> I have a boat</label><br>
+
+            <p><strong>Comment:</strong>{{form1.p1q3}}</p>
+
+            <p><strong>Rating:</strong>{{form1.p1q4}}</p>
+            <input type="range" min="-1" max="1" value="0" id="myRange1" class="slider" oninput="myfun()">
+            <p><strong>Value:</strong><span  id="value1"> </span></p>
+             <p>{% for x in list1 %}
+                 <button onclick="return change(this)" value="{{ x }}">{{ x }} </button>,
+             {% endfor %}</p>
+         <input type="text" name="anno" id="annotable-text">
+<script>
+    function change(el) {
+        var block = el.innerHTML;
+       document.getElementById('annotable-text').value += block;
+       document.getElementById('annotable-text').value += ' ';
+    }
+</script>
+            <script>
+
+                var input = document.querySelector("#id_p1q4");
+                input.value = "0";
+                console.log(input.value);
+                input.style.display="none";
+                output.innerHTML = slider.value;
+
+                function myfun() {
+                    var slider = document.getElementById("myRange1");
+                    var output = document.getElementById("value1");
+                    output.innerHTML = slider.value;
+                }
+                slider.addEventListener("mousemove",function(){
+                    var x = slider.value;
+                    var color = 'linear-gradient(90deg, rgb(117,252,117)' + x + '%, rgb(214,214,214)'  + x +'%)';
+                    slider.style.background = color;
+                })
+            </script>
+
+        </div>
+
+
+
+
+        <div class="tab">
+
+             <h2 style="text-center">Page2</h2>
+
+            <strong>1. What do you think?</strong>
+            <ul>
+                <input type="radio" name="p2q1" value="choice1"><label for="choice1">Male</label>
+                <input type="radio"  name="p2q1" value="choice2"><label for="choice 2">Female</label>
+                <input type="radio" name="p2q1" value="choice3"><label for="choice 3">Other</label>
+
+            </ul>
+
+            <strong>2. What do you want</strong>
+            <input type="checkbox" name="p2q2" value="item_key1">
+            <label for="item_key1"> I have a bike</label><br>
+            <input type="checkbox" name="p2q2" value="item_key2">
+            <label for="item_key2"> I have a car</label><br>
+            <input type="checkbox" name="p2q2" value="item_key3">
+            <label for="item_key3"> I have a boat</label><br>
+
+            <p><strong>Comment:</strong>{{form2.p2q3}}</p>
+
+            <p><strong>Rating:</strong>{{form2.p2q4}}</p>
+            <input type="range" min="-1" max="1" value="0" id="myRange2" class="slider" oninput="myfun1()">
+            <p><strong>Value:</strong><span id="value2">0</span> </p>
+
+            <script>
+
+
+                function myfun1() {
+                    var input = document.querySelector("#id_p2q4");
+                    input.value=0;
+                    input.style.display="none";
+                    var slider = document.getElementById("myRange2");
+                    var output = document.getElementById("value2");
+                    output.innerHTML = slider.value;
+                    input.value=slider.value;
+
+                }
+                // slider.addEventListener("mousemove",function(){
+                //     var x = slider.value;
+                //     var color = 'linear-gradient(90deg, rgb(117,252,117)' + x + '%, rgb(214,214,214)'  + x +'%)';
+                //     slider.style.background = color;
+                // })
+            </script>
+
+        </div>
+
+
+
+
+
+        <div class="tab">
+
+             <h2 style="text-center">Page3</h2>
+
+            <strong>1. What do you think?</strong>
+            <ul>
+                <input type="radio" name="p3q1" value="choice1"><label for="choice1">Male</label>
+                <input type="radio"  name="p3q1" value="choice2"><label for="choice 2">Female</label>
+                <input type="radio" name="p3q1" value="choice3"><label for="choice 3">Other</label>
+
+            </ul>
+
+            <strong>2. What do you want</strong>
+            <input type="checkbox" name="p3q2" value="item_key1">
+            <label for="item_key1"> I have a bike</label><br>
+            <input type="checkbox" name="p3q2" value="item_key2">
+            <label for="item_key2"> I have a car</label><br>
+            <input type="checkbox" name="p3q2" value="item_key3">
+            <label for="item_key3"> I have a boat</label><br>
+
+            <p><strong>Comment:</strong>{{form3.p3q3}}</p>
+
+            <p><strong>Rating:</strong>{{form3.p3q4}}</p>
+            <input type="range" min="-1" max="1" value="0" id="myRange3" class="slider" oninput="myfun2()">
+            <p><strong>Value:</strong><span id="value3">0</span> </p>
+
+            <script>
+                // var input = document.querySelector("#id_p3q4");
+                // input.value = "0";
+                // console.log(input.value);
+                // input.style.display="none";
+                // output.innerHTML = slider.value;
+
+                function myfun2() {
+                    var input = document.querySelector("#id_p3q4");
+                    var slider = document.getElementById("myRange3");
+                    var output = document.getElementById("value3");
+                    output.innerHTML = slider.value;
+                    input.value=slider.value;
+                    input.style.display="none";
+                }
+                // slider.addEventListener("mousemove",function(){
+                //     var x = slider.value;
+                //     var color = 'linear-gradient(90deg, rgb(117,252,117)' + x + '%, rgb(214,214,214)'  + x +'%)';
+                //     slider.style.background = color;
+                // })
+            </script>
+
+        </div>
+
+
+
+
+        <div class="tab">
+
+            <h2 style="text-center">Page 4</h2>
+
+            <strong>1. What do you think?</strong>
+            <ul>
+                <input type="radio" name="p4q1" value="choice1"><label for="choice1">Male</label>
+                <input type="radio"  name="p4q1" value="choice2"><label for="choice 2">Female</label>
+                <input type="radio" name="p4q1" value="choice3"><label for="choice 3">Other</label>
+
+            </ul>
+
+            <strong>2. What do you want</strong>
+            <input type="checkbox" name="p4q2" value="item_key1">
+            <label for="item_key1"> I have a bike</label><br>
+            <input type="checkbox" name="p4q2" value="item_key2">
+            <label for="item_key2"> I have a car</label><br>
+            <input type="checkbox" name="p4q2" value="item_key3">
+            <label for="item_key3"> I have a boat</label><br>
+
+            <p><strong>Comment:</strong>{{form4.p4q3}}</p>
+
+            <p><strong>Rating:</strong>{{form4.p4q4}}</p>
+            <input type="range" min="-1" max="1" value="0" id="myRange4" class="slider" oninput="myfun3()">
+            <p><strong>Value:</strong><span id="value4">0</span> </p>
+
+            <script>
+                // var input = document.querySelector("#id_p4q4");
+                // input.value = "0";
+                // console.log(input.value);
+                // input.style.display="none";
+                // output.innerHTML = slider.value;
+
+                function myfun3() {
+                    var input = document.querySelector("#id_p4q4");
+                    var slider = document.getElementById("myRange4");
+                    var output = document.getElementById("value4");
+                    output.innerHTML = slider.value;
+                    input.value=slider.value;
+                    input.style.display="none";
+                }
+                // slider.addEventListener("mousemove",function(){
+                //     var x = slider.value;
+                //     var color = 'linear-gradient(90deg, rgb(117,252,117)' + x + '%, rgb(214,214,214)'  + x +'%)';
+                //     slider.style.background = color;
+                // })
+            </script>
+
+
+        </div>
+
+
+        <div class="tab">
+
+             <h2 style="text-center">Page5</h2>
+
+            <strong>1. What do you think?</strong>
+            <ul>
+                <input type="radio" name="p5q1" value="choice1"><label for="choice1">Male</label>
+                <input type="radio"  name="p5q1" value="choice2"><label for="choice 2">Female</label>
+                <input type="radio" name="p5q1" value="choice3"><label for="choice 3">Other</label>
+
+            </ul>
+
+            <strong>2. What do you want</strong>
+            <input type="checkbox" name="p5q2" value="item_key1">
+            <label for="item_key1"> I have a bike</label><br>
+            <input type="checkbox" name="p5q2" value="item_key2">
+            <label for="item_key2"> I have a car</label><br>
+            <input type="checkbox" name="p5q2" value="item_key3">
+            <label for="item_key3"> I have a boat</label><br>
+
+            <p><strong>Comment:</strong>{{form5.p5q3}}</p>
+
+            <p><strong>Rating:</strong>{{form5.p5q4}}</p>
+            <input type="range" min="-1" max="1" value="0" id="myRange5" class="slider" oninput="myfun4()">
+            <p><strong>Value:</strong><span id="value5">0</span> </p>
+
+            <script>
+                // var input = document.querySelector("#id_p5q4");
+                // input.value = "0";
+                // console.log(input.value);
+                // input.style.display="none";
+                // output.innerHTML = slider.value;
+
+                function myfun4() {
+                    var input = document.querySelector("#id_p5q4");
+                    var slider = document.getElementById("myRange5");
+                    var output = document.getElementById("value5");
+                    output.innerHTML = slider.value;
+                    input.value=slider.value;
+                    input.style.display="none";
+                }
+                // slider.addEventListener("mousemove",function(){
+                //     var x = slider.value;
+                //     var color = 'linear-gradient(90deg, rgb(117,252,117)' + x + '%, rgb(214,214,214)'  + x +'%)';
+                //     slider.style.background = color;
+                // })
+            </script>
+
+
+
+
+        </div>
+
+
+
+        <div style="overflow:auto;">
+            <div style="float:right;">
+            <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+            <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+            </div>
+        </div>
+
+        <!-- Circles which indicates the steps of the form: -->
+        <div style="text-align:center;margin-top:40px;">
+            <span class="step"></span>
+            <span class="step"></span>
+            <span class="step"></span>
+            <span class="step"></span>
+            <span class="step"></span>
+            <span class="step"></span>
+        </div>
+
+    </form>
+
+
+
+
+
+
+
+</body>
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+      // Menu-toggle button
+
+      $(document).ready(function() {
+            $(".menu-icon").on("click", function() {
+                  $("nav ul").toggleClass("showing");
+            });
+      });
+
+      // Scrolling Effect
+
+      $(window).on("scroll", function() {
+            if($(window).scrollTop()) {
+                  $('nav').addClass('black');
+            }
+
+            else {
+                  $('nav').removeClass('black');
+            }
+      })
+
+
+      </script>
+
+
+
+<script>
+
+    var currentTab = 0; // Current tab is set to be the first tab (0)
+    showTab(currentTab); // Display the current tab
+
+    function showTab(n) {
+        // This function will display the specified tab of the form ...
+        var x = document.getElementsByClassName("tab");
+        x[n].style.display = "block";
+        // ... and fix the Previous/Next buttons:
+        if (n == 0) {
+            document.getElementById("prevBtn").style.display = "none";
+        } else {
+        document.getElementById("prevBtn").style.display = "inline";
+        }
+        if (n == (x.length - 1)) {
+            document.getElementById("nextBtn").innerHTML = "Submit";
+        } else {
+        document.getElementById("nextBtn").innerHTML = "Next";
+         }
+        // ... and run a function that displays the correct step indicator:
+        fixStepIndicator(n)
+        }
+
+        function nextPrev(n) {
+          // This function will figure out which tab to display
+          var x = document.getElementsByClassName("tab");
+          // Exit the function if any field in the current tab is invalid:
+          if (n == 1 && !validateForm()) return false;
+          // Hide the current tab:
+          x[currentTab].style.display = "none";
+          // Increase or decrease the current tab by 1:
+          currentTab = currentTab + n;
+          // if you have reached the end of the form... :
+          if (currentTab >= x.length) {
+            //...the form gets submitted:
+            document.getElementById("regForm").submit();
+            return false;
+          }
+          // Otherwise, display the correct tab:
+          showTab(currentTab);
+        }
+
+        function validateForm() {
+          // This function deals with validation of the form fields
+          var x, y, i, valid = true;
+          x = document.getElementsByClassName("tab");
+          y = x[currentTab].getElementsByTagName("input");
+          // A loop that checks every input field in the current tab:
+          for (i = 0; i < y.length; i++) {
+            // If a field is empty...
+            if (y[i].value == "") {
+              // add an "invalid" class to the field:
+              y[i].className += " invalid";
+              // and set the current valid status to false:
+              valid = false;
+            }
+          }
+          // If the valid status is true, mark the step as finished and valid:
+          if (valid) {
+            document.getElementsByClassName("step")[currentTab].className += " finish";
+          }
+          return valid; // return the valid status
+        }
+
+        function fixStepIndicator(n) {
+          // This function removes the "active" class of all steps...
+          var i, x = document.getElementsByClassName("step");
+          for (i = 0; i < x.length; i++) {
+            x[i].className = x[i].className.replace(" active", "");
+          }
+          //... and adds the "active" class to the current step:
+          x[n].className += " active";
+        }
+
+
+
+</script>
+
+</html>
